@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SilentVoice — Learn Sign Language</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" id="darkModeSheet" href="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" type="image/png" href="icon.png">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Silent<span>Voice</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#translator">Translator</a></li>
+            <li><a href="#lessons">Lessons</a></li>
+            <li><a href="#practice">Practice</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="dark-toggle" id="darkToggle" onclick="toggleDarkMode()">
+            🌙 Dark Mode
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Learn Sign Language<br /><span>The Smart Way</span></h1>
+            <p class="hero-sub">
+                SilentVoice uses AI to teach you real American Sign Language — gesture by gesture. Type any word and instantly see the correct hand signs.
+            </p>
+            <div class="hero-btns">
+                <button class="btn-outline" onclick="scrollToSection('translator')">
+                    Try Translator
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span>26</span>
+                    <p>ASL Letters</p>
+                </div>
+                <div class="stat">
+                    <span>AI</span>
+                    <p>Powered</p>
+                </div>
+                <div class="stat">
+                    <span>Free</span>
+                    <p>Always</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSLATOR SECTION -->
+    <section class="translator-section" id="translator">
+        <div class="section-header">
+            <h2>Type to Sign</h2>
+            <p class="section-sub">
+                Type any word or sentence below and get the correct ASL gesture
+                sequence instantly.
+            </p>
+        </div>
+
+        <div class="translator-box">
+            <div class="translator-input-side">
+                <label class="trans-label">Enter Text</label>
+                <textarea id="transInput" class="trans-textarea" placeholder="Type something... e.g. Hello"></textarea>
+                <div class="trans-actions">
+                    <button class="btn-primary" onclick="translateToSign()">
+                        Translate →
+                    </button>
+                    <button class="btn-outline" onclick="clearTranslator()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="translator-arrow">→</div>
+
+            <div class="translator-output-side">
+                <label class="trans-label">ASL Gesture Sequence</label>
+                <div class="trans-output" id="transOutput">
+                    <p class="trans-placeholder">
+                        Your gesture sequence will appear here...
+                    </p>
+                </div>
+                <p class="trans-note" id="transNote"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSONS SECTION -->
+    <section class="lessons" id="lessons">
+        <div class="section-header">
+            <h2>Choose Your Lesson</h2>
+            <p class="section-sub">
+                Start from alphabets and work your way up to full sentences.
+            </p>
+        </div>
+        <div class="lessons-grid">
+            <div class="lesson-card" onclick="openLesson('Alphabets (A–Z)', '', '🔤', 'alphabets')">
+                <div class="card-icon">🆎</div>
+                <h3>Alphabets A–Z</h3>
+                <p>Learn all 26 hand signs</p>
+                <div class="card-footer">
+                    <span class="level easy">Beginner</span>
+                    <span class="duration">~20 min</span>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('Numbers 0–9', '', '🔢', 'numbers')">
+                <div class="card-icon">🔢</div>
+                <h3>Numbers 0–9</h3>
+                <p>Count and sign numbers</p>
+                <div class="card-footer">
+                    <span class="level easy">Beginner</span>
+                    <span class="duration">~15 min</span>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="openLesson('Common Greetings', '', '👋', 'greetings')">
+                <div class="card-icon">🙏</div>
+                <h3>Common Greetings</h3>
+                <p>Hello, Thanks, Please...</p>
+                <div class="card-footer">
+                    <span class="level medium">Intermediate</span>
+                    <span class="duration">~25 min</span>
+                </div>
+            </div>
+
+            <div class="lesson-card" onclick="showLockedMsg()">
+                <div class="card-icon">😊</div>
+                <h3>Emotions & Feelings</h3>
+                <p>Happy, Sad, Angry...</p>
+                <div class="card-footer">
+                    <span class="level medium">Intermediate</span>
+                    <span class="duration">~30 min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRACTICE SECTION -->
+    <section class="alphabet-section" id="practice">
+        <div class="section-header">
+            <h2>ASL Sign Guide</h2>
+            <p class="section-sub">
+                Choose a category and click any sign to learn how to do it.
+            </p>
+        </div>
+
+        <!-- PRACTICE CATEGORY TABS -->
+        <div class="practice-tabs">
+            <button class="practice-tab-btn active-tab-btn" onclick="switchPracticeTab('alphabets', this)">
+                🆎 Alphabets
+            </button>
+            <button class="practice-tab-btn" onclick="switchPracticeTab('numbers', this)">
+                🔢 Numbers
+            </button>
+            <button class="practice-tab-btn" onclick="switchPracticeTab('greetings', this)">
+                🙏 Greetings
+            </button>
+        </div>
+
+        <!-- GRIDS -->
+        <div class="alphabet-grid" id="alphabetGrid"></div>
+        <div class="alphabet-grid" id="numbersGrid" style="display: none"></div>
+        <div class="alphabet-grid" id="greetingsGrid" style="display: none"></div>
+    </section>
+
+    <!-- PRACTICE SIMULATOR -->
+    <section class="simulator">
+        <div class="sim-left">
+            <h2>Future Scope !!</h2>
+            <p>
+                In the future, your webcam feed will be analyzed by our AI model in
+                real time. It will detect your hand gesture and tells you if you got
+                the sign right.
+            </p>
+            <ul class="sim-features">
+                <li>✅ Real-time hand tracking</li>
+                <li>✅ Instant correctness feedback</li>
+                <li>✅ Score and progress tracking</li>
+                <li>✅ Slow-motion gesture replay</li>
+            </ul>
+        </div>
+        <div class="sim-right">
+            <div class="sim-box" id="simBox">
+                <div class="future-cam-placeholder">
+                    <div class="future-cam-icon">📷</div>
+                    <h3>Camera Feed</h3>
+                    <p>
+                        This area will display the live webcam feed in a future version of
+                        SilentVoice. The camera will capture your hand gestures in real
+                        time and the AI model will identify which ASL letter you are
+                        signing.
+                    </p>
+                    <span class="future-badge">🚀 Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <p class="section-tag">🧠 About SilentVoice</p>
+            <h2>Why We Built This</h2>
+            <p>
+                Over 430 million people worldwide have disabling hearing loss. Sign
+                language is their primary communication tool — yet most people around
+                them don't understand it. SilentVoice bridges that gap using ethical,
+                accessible AI.
+            </p>
+            <p>
+                Our AI model is trained on diverse hand gesture datasets to ensure it
+                works across different skin tones, hand sizes, and lighting conditions
+                — because ethical AI means AI that works for everyone.
+            </p>
+            <div class="ethics-badges">
+                <span>🌍 Inclusive by Design</span>
+                <span>🔒 No Data Stored</span>
+                <span>📖 Open Source</span>
+                <span>♿ Accessible First</span>
+            </div>
+        </div>
+        <div class="about-visual">
+            <div class="stat-card">
+                <h3>430M+</h3>
+                <p>People with hearing loss worldwide</p>
+            </div>
+            <div class="stat-card">
+                <h3>72+</h3>
+                <p>Countries with their own sign language</p>
+            </div>
+            <div class="stat-card">
+                <h3>95%</h3>
+                <p>AI gesture detection accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>
+                SilentVoice — ICTWS II Lab Project | Thank You For visiting.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <button class="btn-primary" onclick="closeModal()">Got it →</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
